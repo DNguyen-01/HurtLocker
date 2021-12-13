@@ -41,13 +41,10 @@ public class PatternMatcher {
 
     public int changeAllInstancesOfName() {
 
-        //pattern matcher to search for "Hamlet"
         int matchCounter = 0;
         Pattern pattern = Pattern.compile("NAME");
-        //find all matches in hamletData
         Matcher matcher = pattern.matcher(groceryList);
         matchCounter += matcher.groupCount();
-        //replace all the matcher w/ Leon
         groceryList = matcher.replaceAll("name");
 
         //searches for all uppercase
@@ -71,7 +68,6 @@ public class PatternMatcher {
 
 
         return matchCounter;
-
 
         //method to change various form of name -> Name
 

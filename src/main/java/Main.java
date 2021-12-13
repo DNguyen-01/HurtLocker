@@ -22,33 +22,33 @@ public class Main {
     public static void main(String[] args) throws Exception{
 
         String groceryList = loadFile();
-        //pattern matcher to search for "Hamlet"
 //        int matchCounter = 0;
         Pattern pattern = Pattern.compile("NAME");
         //find all matches in hamletData
         Matcher matcher = pattern.matcher(groceryList);
 //        matchCounter += matcher.groupCount();
-        //replace all the matcher w/ Leon
-        groceryList = matcher.replaceAll("name");
+        groceryList = matcher.replaceAll("\nname");
 
-        //searches for all uppercase
+
         pattern = Pattern.compile("naMe");
         matcher = pattern.matcher(groceryList);
 //        matchCounter += matcher.groupCount();
         //replace with all uppercase
-        groceryList = matcher.replaceAll("name");
+        groceryList = matcher.replaceAll("\nname");
 
         pattern = Pattern.compile("naME");
         matcher = pattern.matcher(groceryList);
 //        matchCounter += matcher.groupCount();
         //replace with all uppercase
-        groceryList = matcher.replaceAll("name");
+        groceryList = matcher.replaceAll("\nname");
 
         pattern = Pattern.compile("NAMe");
         matcher = pattern.matcher(groceryList);
 //        matchCounter += matcher.groupCount();
         //replace with all uppercase
-        groceryList = matcher.replaceAll("name");
+        groceryList = matcher.replaceAll("\nname");
+
+
 
 
 

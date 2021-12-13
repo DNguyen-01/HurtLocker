@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URI;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -13,62 +15,100 @@ import java.util.regex.Pattern;
 public class Main {
 
 
-
-    public String readRawDataToString() throws Exception{
+    public String readRawDataToString() throws Exception {
         ClassLoader classLoader = getClass().getClassLoader();
         String result = IOUtils.toString(classLoader.getResourceAsStream("RawData.txt"));
         return result;
     }
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
 
         String groceryList = loadFile();
-        int matchCounter = 0;
 
-//        String patternString1 = "(name) (?i)";
-//        Pattern pattern = Pattern.compile(patternString1);
-//        Matcher matcher = pattern.matcher(groceryList);
-//        while (matcher.find()){
-//            System.out.println("found: " + matcher.group(1) + "" + matcher.group(2));
-//        }
-
+        //
         Pattern pattern = Pattern.compile("(?i)name");
         Matcher matcher = pattern.matcher(groceryList);
-//        matchCounter += matcher.groupCount();
-        groceryList = matcher.replaceAll("\nname");
-//        String name = groceryList;
+        String name = matcher.replaceAll("\nname");
+
+        Pattern pattern1 = Pattern.compile("(?i)milk");
+        Matcher matcher1 = pattern1.matcher(groceryList);
+        String milk = matcher1.replaceAll("Milk");
 
 
-        Pattern pattern2 = Pattern.compile("(?i)milk");
+        Pattern pattern2 = Pattern.compile("(?i)apples");
         Matcher matcher2 = pattern2.matcher(groceryList);
-        groceryList = matcher2.replaceAll("Milk");
-//        String milk = groceryList;
+        String apples = matcher2.replaceAll("Apples");
 
-        Pattern pattern3 = Pattern.compile("(?i)apples");
+
+        Pattern pattern3 = Pattern.compile("(?i)bread");
         Matcher matcher3 = pattern3.matcher(groceryList);
-//      matchCounter += matcher.groupCount();
-        groceryList = matcher3.replaceAll("Apples");
+        String bread = matcher3.replaceAll("Bread");
 
-        Pattern pattern4 = Pattern.compile("(?i)price");
+
+        Pattern pattern4 = Pattern.compile("(?i)cookies");
         Matcher matcher4 = pattern4.matcher(groceryList);
-//      matchCounter += matcher.groupCount();
-        groceryList = matcher4.replaceAll("\nPrice");
+        String cookie = matcher4.replaceAll("Cookies");
 
-        Pattern pattern5 = Pattern.compile("[#;]");
+        Pattern pattern5 = Pattern.compile("(?i)price");
         Matcher matcher5 = pattern5.matcher(groceryList);
-//      matchCounter += matcher5.groupCount();
-        groceryList = matcher5.replaceAll("");
+        String price = matcher5.replaceAll("\nPrice");
+
+        Pattern pattern6 = Pattern.compile("(?i)foodexpiration");
+        Matcher matcher6 = pattern6.matcher(groceryList);
+        String foodExpiration = matcher6.replaceAll("\nFoodExpiration");
+
+        Pattern pattern7 = Pattern.compile("[#;%^!@]");
+        Matcher matcher7 = pattern7.matcher(groceryList);
+        groceryList = matcher7.replaceAll("");
+
+        Pattern pattern8 = Pattern.compile("(?i)type");
+        Matcher matcher8 = pattern8.matcher(groceryList);
+        groceryList = matcher8.replaceAll("\n");
+
+        int milkCounter = 0;
+        Pattern milkPattern = Pattern.compile("(?i)milk");
+        Matcher milkMatcher = milkPattern.matcher(groceryList);
+        while (milkMatcher.find()) {
+            milkCounter++;
+        }
+
+        int breadCounter = 0;
+        Pattern breadPattern = Pattern.compile("(?i)bread");
+        Matcher breadMatcher = milkPattern.matcher(groceryList);
+        while (breadMatcher.find()) {
+            breadCounter++;
+        }
+
+        int cookieCounter = 0;
+        Pattern cookiePattern = Pattern.compile("(?i)cookies");
+        Matcher cookieMatcher = milkPattern.matcher(groceryList);
+        while (cookieMatcher.find()) {
+            cookieCounter++;
+        }
+
+        int appleCounter = 0;
+        Pattern applePattern = Pattern.compile("(?i)apples");
+        Matcher appleMatcher = applePattern.matcher(groceryList);
+        while (appleMatcher.find()) {
+            appleCounter++;
+        }
+
+        int priceCounter = 0;
+        Pattern pricePattern = Pattern.compile("3.23");
+        Matcher priceMatcher = pricePattern.matcher(groceryList);
+        while ((priceMatcher.find())) {
+            priceCounter++;
+        }
 
 
         System.out.println(groceryList);
-
-
-
-
-//        String output = groceryList;
-//        System.out.println(output);
+//        System.out.println(name + cookie + cookieCounter);
 
     }
+
+
+
+
 
     private static String loadFile() {
         ClassLoader classLoader = Main.class.getClassLoader();

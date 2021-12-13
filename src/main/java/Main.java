@@ -23,6 +23,15 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
+        /* TODO
+        -> filter out the characters and weird symbols
+        -> consolidate the multiple occurrence of the words
+        -> get count (food, price)
+        -> errors
+        -> modify for printing out  -> add line for expiration date
+         */
+
+
         String groceryList = loadFile();
 
         //

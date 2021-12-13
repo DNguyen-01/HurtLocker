@@ -39,39 +39,34 @@ public class PatternMatcher {
         return result.toString();
     }
 
-    public int changeAllInstancesOfName() {
+    public String changeAllInstancesOfName() {
 
-        int matchCounter = 0;
-        Pattern pattern = Pattern.compile("NAME");
+//        int matchCounter = 0;
+        Pattern pattern = Pattern.compile("(?i)NAME");
         Matcher matcher = pattern.matcher(groceryList);
-        matchCounter += matcher.groupCount();
+//        matchCounter += matcher.groupCount();
         groceryList = matcher.replaceAll("name");
 
-        //searches for all uppercase
-        pattern = Pattern.compile("naMe");
-        matcher = pattern.matcher(groceryList);
-        matchCounter += matcher.groupCount();
-        //replace with all uppercase
-        groceryList = matcher.replaceAll("name");
-
-        pattern = Pattern.compile("naME");
-        matcher = pattern.matcher(groceryList);
-        matchCounter += matcher.groupCount();
-        //replace with all uppercase
-        groceryList = matcher.replaceAll("name");
-
-        pattern = Pattern.compile("NAMe");
-        matcher = pattern.matcher(groceryList);
-        matchCounter += matcher.groupCount();
-        //replace with all uppercase
-        groceryList = matcher.replaceAll("name");
-
-
-        return matchCounter;
-
-        //method to change various form of name -> Name
-
-
-        //
+//        //searches for all uppercase
+//        pattern = Pattern.compile("naMe");
+//        matcher = pattern.matcher(groceryList);
+//        matchCounter += matcher.groupCount();
+//        //replace with all uppercase
+//        groceryList = matcher.replaceAll("name");
+//
+//        pattern = Pattern.compile("naME");
+//        matcher = pattern.matcher(groceryList);
+//        matchCounter += matcher.groupCount();
+//        //replace with all uppercase
+//        groceryList = matcher.replaceAll("name");
+//
+//        pattern = Pattern.compile("NAMe");
+//        matcher = pattern.matcher(groceryList);
+//        matchCounter += matcher.groupCount();
+//        //replace with all uppercase
+//        groceryList = matcher.replaceAll("name");
+        return groceryList;
     }
+
+
 }

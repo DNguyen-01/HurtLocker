@@ -1,3 +1,4 @@
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
 import jdk.nashorn.internal.parser.JSONParser;
 import org.apache.commons.io.IOUtils;
 
@@ -22,40 +23,36 @@ public class Main {
     public static void main(String[] args) throws Exception{
 
         String groceryList = loadFile();
-//        int matchCounter = 0;
-        Pattern pattern = Pattern.compile("NAME");
-        //find all matches in hamletData
+        int matchCounter = 0;
+
+//        String patternString1 = "(name) (?i)";
+//        Pattern pattern = Pattern.compile(patternString1);
+//        Matcher matcher = pattern.matcher(groceryList);
+//        while (matcher.find()){
+//            System.out.println("found: " + matcher.group(1) + "" + matcher.group(2));
+//        }
+
+        Pattern pattern = Pattern.compile("(?i)name");
         Matcher matcher = pattern.matcher(groceryList);
 //        matchCounter += matcher.groupCount();
-        groceryList = matcher.replaceAll("\nname");
+        groceryList = matcher.replaceAll("\nname:");
+//        String name = groceryList;
 
 
-        pattern = Pattern.compile("naMe");
-        matcher = pattern.matcher(groceryList);
-//        matchCounter += matcher.groupCount();
-        //replace with all uppercase
-        groceryList = matcher.replaceAll("\nname");
+        Pattern pattern2 = Pattern.compile("(?i)milk");
+        Matcher matcher2 = pattern2.matcher(groceryList);
+        groceryList = matcher2.replaceAll("Milk");
+//        String milk = groceryList;
 
-        pattern = Pattern.compile("naME");
-        matcher = pattern.matcher(groceryList);
-//        matchCounter += matcher.groupCount();
-        //replace with all uppercase
-        groceryList = matcher.replaceAll("\nname");
 
-        pattern = Pattern.compile("NAMe");
-        matcher = pattern.matcher(groceryList);
-//        matchCounter += matcher.groupCount();
-        //replace with all uppercase
-        groceryList = matcher.replaceAll("\nname");
+
+        System.out.println(groceryList);
 
 
 
 
-
-
-
-        String output = groceryList;
-        System.out.println(output);
+//        String output = groceryList;
+//        System.out.println(output);
 
     }
 

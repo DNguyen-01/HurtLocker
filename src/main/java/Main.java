@@ -35,7 +35,7 @@ public class Main {
         Pattern pattern = Pattern.compile("(?i)name");
         Matcher matcher = pattern.matcher(groceryList);
 //        matchCounter += matcher.groupCount();
-        groceryList = matcher.replaceAll("\nname:");
+        groceryList = matcher.replaceAll("\nname");
 //        String name = groceryList;
 
 
@@ -44,6 +44,20 @@ public class Main {
         groceryList = matcher2.replaceAll("Milk");
 //        String milk = groceryList;
 
+        Pattern pattern3 = Pattern.compile("(?i)apples");
+        Matcher matcher3 = pattern3.matcher(groceryList);
+//      matchCounter += matcher.groupCount();
+        groceryList = matcher3.replaceAll("Apples");
+
+        Pattern pattern4 = Pattern.compile("(?i)price");
+        Matcher matcher4 = pattern4.matcher(groceryList);
+//      matchCounter += matcher.groupCount();
+        groceryList = matcher4.replaceAll("\nPrice");
+
+        Pattern pattern5 = Pattern.compile("[#;]");
+        Matcher matcher5 = pattern5.matcher(groceryList);
+//      matchCounter += matcher5.groupCount();
+        groceryList = matcher5.replaceAll("");
 
 
         System.out.println(groceryList);

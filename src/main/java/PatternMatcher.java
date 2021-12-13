@@ -1,19 +1,23 @@
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
+import java.security.PublicKey;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class PatternMatcher {
+public class  PatternMatcher {
 
     //create a class loader to import the RawData.txt into a map
 
     private String groceryList;
+    public PatternMatcher patternMatcher;
 
     public PatternMatcher() {
         this.groceryList = loadFile();
+        PatternMatcher patternMatcher = new PatternMatcher();
     }
+
 
     private String loadFile() {
         ClassLoader classLoader = getClass().getClassLoader();
@@ -41,32 +45,106 @@ public class PatternMatcher {
 
     public String changeAllInstancesOfName() {
 
-//        int matchCounter = 0;
-        Pattern pattern = Pattern.compile("(?i)NAME");
+        int matchCounter = 0;
+        Pattern pattern = Pattern.compile("(?i)name");
         Matcher matcher = pattern.matcher(groceryList);
-//        matchCounter += matcher.groupCount();
-        groceryList = matcher.replaceAll("name");
+//      matchCounter += matcher.groupCount();
+        groceryList = matcher.replaceAll("\nname");
 
-//        //searches for all uppercase
-//        pattern = Pattern.compile("naMe");
-//        matcher = pattern.matcher(groceryList);
-//        matchCounter += matcher.groupCount();
-//        //replace with all uppercase
-//        groceryList = matcher.replaceAll("name");
+        return groceryList;
+
+
+    }
+
+    public String changeAllInstancesOfFoodType() {
+
+        int matchCounterMilk = 0;
+        Pattern pattern1 = Pattern.compile("(?i)milk");
+        Matcher matcher1 = pattern1.matcher(groceryList);
+//      matchCounter += matcher.groupCount();
+        groceryList = matcher1.replaceAll("Milk");
+
+        int matchCounterApples = 0;
+        Pattern pattern2 = Pattern.compile("(?i)apples");
+        Matcher matcher2 = pattern2.matcher(groceryList);
+//      matchCounter += matcher.groupCount();
+        groceryList = matcher2.replaceAll("Apples");
+
+        int matchCounterBread = 0;
+        Pattern pattern3 = Pattern.compile("(?i)bread");
+        Matcher matcher3 = pattern3.matcher(groceryList);
+//      matchCounter += matcher.groupCount();
+        groceryList = matcher3.replaceAll("Bread");
+
+        int matchCounterCookies = 0;
+        Pattern pattern4 = Pattern.compile("(?i)cookies");
+        Matcher matcher4 = pattern4.matcher(groceryList);
+//      matchCounter += matcher.groupCount();
+        groceryList = matcher4.replaceAll("Cookie");
+
+        return groceryList;
+
+    }
+
+//    public String changeAllInstancesOfApples() {
 //
-//        pattern = Pattern.compile("naME");
-//        matcher = pattern.matcher(groceryList);
-//        matchCounter += matcher.groupCount();
-//        //replace with all uppercase
-//        groceryList = matcher.replaceAll("name");
+//        int matchCounter = 0;
+//        Pattern pattern = Pattern.compile("(?i)apples");
+//        Matcher matcher = pattern.matcher(groceryList);
+////      matchCounter += matcher.groupCount();
+//        groceryList = matcher.replaceAll("Apples");
 //
-//        pattern = Pattern.compile("NAMe");
-//        matcher = pattern.matcher(groceryList);
-//        matchCounter += matcher.groupCount();
-//        //replace with all uppercase
-//        groceryList = matcher.replaceAll("name");
+//        return groceryList;
+//
+//    }
+
+//    public String changeAllInstancesOfBread() {
+//
+//
+//        Pattern pattern = Pattern.compile("(?i)bread");
+//        Matcher matcher = pattern.matcher(groceryList);
+////      matchCounter += matcher.groupCount();
+//        groceryList = matcher.replaceAll("Bread");
+//
+//        return groceryList;
+//    }
+//
+//    public String changeAllInstancesOfCookies() {
+//
+//
+//        Pattern pattern = Pattern.compile("(?i)cookies");
+//        Matcher matcher = pattern.matcher(groceryList);
+////      matchCounter += matcher.groupCount();
+//        groceryList = matcher.replaceAll("Cookie");
+//
+//        return groceryList;
+//
+//    }
+
+    public String changeAllInstancesOfPrices() {
+
+
+        Pattern pattern = Pattern.compile("(?i)prices");
+        Matcher matcher = pattern.matcher(groceryList);
+//      matchCounter += matcher.groupCount();
+        groceryList = matcher.replaceAll("\nPrices");
+
+        return groceryList;
+
+    }
+
+    public String removeAllHashTags (){
+        Pattern pattern = Pattern.compile("[#;]");
+        Matcher matcher = pattern.matcher(groceryList);
+//      matchCounter += matcher.groupCount();
+        groceryList = matcher.replaceAll("");
+
         return groceryList;
     }
 
 
+
 }
+
+
+

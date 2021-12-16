@@ -2,7 +2,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,7 +11,7 @@ public class  PatternMatcher {
     //create a class loader to import the RawData.txt into a map
 
     private static String groceryList;
-    private HashMap<String, Integer> occurrencesOfFood = new HashMap<String,Integer>();
+    private HashMap<String, Integer> occurrencesOfFood = new HashMap<String, Integer>();
 
 
     public PatternMatcher() {
@@ -45,49 +44,16 @@ public class  PatternMatcher {
     }
 
 
-    static String changeAllInstancesOfLabels() {
+    public Matcher getPrice() {
 
-        Pattern pattern = Pattern.compile("(?i)name");
-        Matcher matcher = pattern.matcher(groceryList);
-        String name = matcher.replaceAll("\nname");
+        Pattern pricePattern = Pattern.compile("\\d[.]\\d\\d");
+        Matcher priceMatcher = pricePattern.matcher(groceryList);
+        while (priceMatcher.find()) {
 
-        Pattern pattern1 = Pattern.compile("(?i)milk");
-        Matcher matcher1 = pattern1.matcher(groceryList);
-        String milk = matcher1.replaceAll("Milk");
+            return priceMatcher;
 
-
-        Pattern pattern2 = Pattern.compile("(?i)apples");
-        Matcher matcher2 = pattern2.matcher(groceryList);
-        String apples = matcher2.replaceAll("Apples");
-
-
-        Pattern pattern3 = Pattern.compile("(?i)bread");
-        Matcher matcher3 = pattern3.matcher(groceryList);
-        String bread = matcher3.replaceAll("Bread");
-
-
-        Pattern pattern4 = Pattern.compile("(?i)cookies");
-        Matcher matcher4 = pattern4.matcher(groceryList);
-        String cookie = matcher4.replaceAll("Cookies");
-
-        Pattern pattern5 = Pattern.compile("(?i)price");
-        Matcher matcher5 = pattern5.matcher(groceryList);
-        String price = matcher5.replaceAll("\nPrice");
-
-        Pattern pattern6 = Pattern.compile("(?i)foodexpiration");
-        Matcher matcher6 = pattern6.matcher(groceryList);
-        String foodExpiration = matcher6.replaceAll("\nFoodExpiration");
-
-        Pattern pattern7 = Pattern.compile("[#;%^!@]");
-        Matcher matcher7 = pattern7.matcher(groceryList);
-        groceryList = matcher7.replaceAll("");
-
-        Pattern pattern8 = Pattern.compile("(?i)type");
-        Matcher matcher8 = pattern8.matcher(groceryList);
-        groceryList = matcher8.replaceAll("\n");
-
-        return groceryList;
-
+        }
+        return null;
     }
 
 
@@ -120,16 +86,17 @@ public class  PatternMatcher {
         while (appleMatcher.find()) {
             appleCounter++;
         }
+//
+//            int priceCounter = 0;
+//            Pattern pricePattern = Pattern.compile("3.23");
+//            Matcher priceMatcher = pricePattern.matcher(groceryList);
+//            while ((priceMatcher.find())) {
+//                priceCounter++;
 
-        int priceCounter = 0;
-        Pattern pricePattern = Pattern.compile("3.23");
-        Matcher priceMatcher = pricePattern.matcher(groceryList);
-        while ((priceMatcher.find())){
-            priceCounter++;
-        }
-
-        return priceCounter;
+        return 0;
     }
+}
+
 
 
     //get the frequency of food appearing in the groceryList
@@ -149,7 +116,7 @@ public class  PatternMatcher {
 //        }
 //    }
 
-}
+
 
 
 

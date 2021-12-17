@@ -3,7 +3,7 @@ import org.apache.commons.io.IOUtils;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
-import java.util.Scanner;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -103,23 +103,70 @@ public class Main {
 //        }
 
 
+        /* TODO build out the pattern */
+
         groceryList = loadFile();
 
-        Pattern pattern7 = Pattern.compile("##");
-        Matcher matcher7 = pattern7.matcher(groceryList);
-        groceryList = matcher7.replaceAll("\n");
+//        Pattern pattern7 = Pattern.compile("##");
+//        Matcher matcher7 = pattern7.matcher(groceryList);
+//        groceryList = matcher7.replaceAll("\n");
+//        String[] items = groceryList.split("\n");
 
-        String[] items = groceryList.split("\n");
-        for(String item : items){
-            System.out.println(item);
-           Pattern pattern = Pattern.compile("(\\w)");
-           Matcher matcher = pattern.matcher(item);
-           matcher.matches();
-            System.out.println(matcher.group(0));
-            break;
+        Pattern pattern = Pattern.compile("([\\w\\d]*):([\\w\\d./]*)[;^%&@#]+");
+        Matcher matcher = pattern.matcher(groceryList);
+
+        int errorCounter = 0;
+
+        List<String> orderedItems = new ArrayList<>();
+        Map<String, ItemTracker> items = new HashMap<>();
+
+        String currentName = "";
+        String currentPrice = "";
+
+        while (matcher.find()) {
+            String key = matcher.group(1);
+            String value = matcher.group(2);
+            boolean lastKeyValue = matcher.group(0).contains("##");
+            if (key.equals("") || value.equals("")) {
+                errorCounter++;
+            } else {
+                if (key.toLowerCase().equals("name")) {
+                    currentName = value.replace('0', 'o').toLowerCase();
+                }
+                else if(key.toLowerCase().equals("price")){
+                    currentPrice = value;
+                }
+            }
+            if (lastKeyValue) {
+                if(!currentName.equals("") && !currentPrice.equals("")) {
+                    if (items.get(currentName) == null) {
+                        items.put(currentName, new ItemTracker(currentName));
+                        orderedItems.add(currentName);
+                    }
+                    ItemTracker currentItem = items.get(currentName);
+                    currentItem.incrementCount();
+                    currentItem.addPrice(currentPrice);
+                    items.put(currentItem.getName().toLowerCase(), currentItem);
+                }
+                currentName = "";
+                currentPrice = "";
+            }
+//            System.out.println("key: " + key + ";Value: " + value + "; " + lastKeyValue);
+//            break;
         }
+        for (String item: orderedItems) {
 
-        System.out.println(groceryList);
+            ItemTracker currentItemTracker = items.get(item);
+            System.out.println("name:" + currentItemTracker.getName() + " seen: " + currentItemTracker.getCount());
+            for (Map.Entry<String, Integer> priceFrequency : currentItemTracker.getPriceFrequency().entrySet()) {
+                System.out.println("price: " + priceFrequency.getKey() + " seen: " + priceFrequency.getValue());
+            }
+        }
+        System.out.println(errorCounter);
+
+
+
+
 
 
     }
